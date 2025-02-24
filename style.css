@@ -1,0 +1,65 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Use a clean, readable font */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header and Footer styles */
+  header, footer {
+    background-color: #f2f2f2;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Main content flex container */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  /* Each section with some spacing */
+  section {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  /* Example of a new CSS property not covered in class: filter */
+  img {
+    display: block;
+    margin-bottom: 1rem;
+    transition: filter 0.4s ease;
+  }
+  
+  /* When hovered, apply a grayscale filter */
+  img:hover {
+    filter: grayscale(50%);
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 600px) {
+    body {
+      font-size: 16px;
+    }
+    
+    section {
+      margin-bottom: 1rem;
+    }
+  }
