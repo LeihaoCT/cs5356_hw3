@@ -3,29 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Homepage</title>
-  <!-- Link to a CSS file for styling (you can modify or add styles later) -->
+  <title>Doudou Homepage</title>
+  
+  <!-- Open Graph meta tags for rich link previews -->
+  <meta property="og:title" content="My Personal Homepage">
+  <meta property="og:description" content="Discover my interests, bio, and interactive features on my personal website.">
+  <meta property="og:image" content="https://leihaoct.github.io/cs5356_hw3/avatar.jpg">
+  <meta property="og:url" content="https://leihaoct.github.io/cs5356_hw3/">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My Personal Homepage">
+  <meta name="twitter:description" content="Discover my interests, bio, and interactive features on my personal website.">
+  <meta name="twitter:image" content="https://leihaoct.github.io/cs5356_hw3/avatar.jpg">
+  
+  <!-- Link to external CSS file -->
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- (Optional) Analytics tracking script can be added here -->
+  <!-- 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
 </head>
 <body>
-  <!-- Header section -->
+  <!-- Header Section -->
   <header>
-    <h1>Welcome to My Homepage</h1>
+    <h1>Doudou</h1>
   </header>
   
-  <!-- Main content area -->
+  <!-- Main Content -->
   <main>
+    <!-- About Me Section -->
     <section>
-      <p>This is my initial test page. Once you push this file to GitHub Pages, verify that the page loads correctly before expanding its content.</p>
+      <h2>About Me</h2>
+      <!-- Make sure to add 'avatar.jpg' to your repository -->
+      <img src="dou_home.jpg" alt="My Avatar" width="150">
+      <p>Hello! My name is Doudou. Nice to meet you.</p>
     </section>
+    
+    <!-- Interests Section -->
+    <section>
+      <h2>My Interests</h2>
+      <ul>
+        <li>Eating</li>
+        <li>Sleeping</li>
+        <li>Staring</li>
+        <li>Misbehaving</li>
+      </ul>
+    </section>
+    
+    <!-- Interactive Mouse Tracker Section (Extra Credit) -->
+    <section id="interactive-section">
+      <h2>Interactive Mouse Tracker</h2>
+      <p>Move your mouse over this area and watch the background color change!</p>
+    </section>
+    
+    <!-- API Data Section -->
+    <section>
+      <h2>API Data Example</h2>
+      <button id="fetch-button">Fetch Public API Data</button>
+      <ul id="api-results"></ul>
+    </section>
+    
+    <!-- New HTML Element Example: <details> (Extra Credit) -->
+    <details>
+      <summary>Fun Fact About Me</summary>
+      <p>I once traveled across the country in a van, visiting 25 different states in just two months!</p>
+    </details>
   </main>
   
-  <!-- Footer section -->
+  <!-- Footer Section -->
   <footer>
-    <p>&copy; 2025 My Homepage</p>
+    <p>&copy; 2025 Doudou. All rights reserved.</p>
   </footer>
   
-  <!-- Link to a JavaScript file for any future interactivity -->
+  <!-- Link to external JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
