@@ -102,3 +102,10 @@
   .skill span {
     margin-left: 10px;
   }
+
+  progress {
+    height: 20px;
+    width: 100%;
+    border-radius: 10px;
+    transition: value 2s ease-out; /* Adds transition effect */
+  }

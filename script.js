@@ -22,3 +22,15 @@ fetchButton.addEventListener('click', () => {
       apiResults.innerHTML = '<li>Failed to load data. Please try again later.</li>';
     });
 });
+
+// Animate progress bars when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  const progressBars = document.querySelectorAll('progress');
+  progressBars.forEach(bar => {
+    const finalValue = bar.value;
+    bar.value = 0;
+    setTimeout(() => {
+      bar.value = finalValue;
+    }, 300);
+  });
+});
