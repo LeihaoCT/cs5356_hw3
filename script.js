@@ -23,14 +23,31 @@ fetchButton.addEventListener('click', () => {
     });
 });
 
-// Animate progress bars when page loads
+// Animate progress bars when page loads with a gradual effect
 document.addEventListener('DOMContentLoaded', () => {
   const progressBars = document.querySelectorAll('progress');
+  
   progressBars.forEach(bar => {
     const finalValue = bar.value;
+    const duration = 1500; // Animation duration in milliseconds
+    const steps = 30; // Number of steps for the animation
+    const increment = finalValue / steps;
+    let currentValue = 0;
+    
+    // Reset to zero initially
     bar.value = 0;
-    setTimeout(() => {
-      bar.value = finalValue;
-    }, 300);
+    
+    // Create an interval to gradually increase the value
+    const interval = setInterval(() => {
+      currentValue += increment;
+      
+      // Make sure we don't exceed the final value
+      if (currentValue >= finalValue) {
+        bar.value = finalValue;
+        clearInterval(interval);
+      } else {
+        bar.value = currentValue;
+      }
+    }, duration / steps);
   });
 });
