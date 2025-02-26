@@ -109,3 +109,33 @@
     border-radius: 10px;
     transition: value 2s ease-out; /* Adds transition effect */
   }
+
+    /* Cat eye tracking interactive element */
+  #interactive-section {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+  .cat-eye-tracker {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e4d8b4; /* Cat eye color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .pupil {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #000;
+    position: relative;
+    transition: transform 0.05s ease-out;
+  }
