@@ -63,3 +63,31 @@
       margin-bottom: 1rem;
     }
   }
+
+  .skill {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap on small screens */
+  }
+  
+  .skill label {
+    width: 200px;
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevents the label from shrinking */
+  }
+  
+  progress {
+    height: 20px;
+    flex: 1; /* Takes up remaining space */
+    min-width: 150px; /* Ensures minimum width on small screens */
+    max-width: 300px; /* Limits width on larger screens */
+    border-radius: 10px;
+  }
+  
+  .skill span {
+    margin-left: 10px;
+    width: 40px; /* Fixed width for percentage */
+    text-align: right; /* Right-aligns the text */
+    flex-shrink: 0; /* Prevents the percentage from shrinking */
+  }
