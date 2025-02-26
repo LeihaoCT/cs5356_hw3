@@ -64,30 +64,41 @@
     }
   }
 
+    /* Skills section styling */
   .skill {
     margin-bottom: 1rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px 200px 50px;
     align-items: center;
-    flex-wrap: wrap; /* Allows items to wrap on small screens */
   }
-  
+
   .skill label {
-    width: 200px;
-    margin-right: 10px;
-    flex-shrink: 0; /* Prevents the label from shrinking */
+    text-align: right;
+    padding-right: 15px;
   }
-  
+
   progress {
     height: 20px;
-    flex: 1; /* Takes up remaining space */
-    min-width: 150px; /* Ensures minimum width on small screens */
-    max-width: 300px; /* Limits width on larger screens */
+    width: 100%;
     border-radius: 10px;
   }
-  
+
+  /* Custom styling for progress elements */
+  progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+  }
+
+  progress::-webkit-progress-value {
+    background-color: #4682B4; /* Match your existing color scheme */
+    border-radius: 10px;
+  }
+
+  progress::-moz-progress-bar {
+    background-color: #4682B4;
+    border-radius: 10px;
+  }
+
   .skill span {
     margin-left: 10px;
-    width: 40px; /* Fixed width for percentage */
-    text-align: right; /* Right-aligns the text */
-    flex-shrink: 0; /* Prevents the percentage from shrinking */
   }
