@@ -19,10 +19,9 @@
   <meta name="twitter:image" content="https://leihaoct.github.io/cs5356_hw3/avatar.jpg">
   
   <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
   
-  <!-- (Optional) Analytics tracking script can be added here -->
-  <!-- 
+  <!-- Analytics tracking script -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -30,7 +29,6 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
-  -->
 </head>
 <body>
   <!-- Header Section -->
@@ -45,7 +43,7 @@
       <h2>About Me</h2>
       <!-- Make sure to add 'avatar.jpg' to your repository -->
       <img src="avatar.jpg" alt="My Avatar" width="150">
-      <p>Hello! My name is [Your Name]. I enjoy exploring technology, reading, and outdoor adventures.</p>
+      <p>Hello! My name is Hao Lei. I enjoy exploring technology, reading, and outdoor adventures.</p>
     </section>
     
     <!-- Interests Section -->
@@ -63,6 +61,9 @@
     <section id="interactive-section">
       <h2>Interactive Mouse Tracker</h2>
       <p>Move your mouse over this area and watch the background color change!</p>
+      <div id="mouse-tracker" style="height: 200px; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center;">
+        <span id="coordinates">Move your mouse here</span>
+      </div>
     </section>
     
     <!-- API Data Section -->
@@ -81,7 +82,7 @@
   
   <!-- Footer Section -->
   <footer>
-    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    <p>&copy; 2025 Hao Lei. All rights reserved.</p>
   </footer>
   
   <!-- Link to external JavaScript file -->
