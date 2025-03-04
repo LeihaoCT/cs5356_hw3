@@ -92,11 +92,12 @@ function fetchCitibikeData() {
     });
 }
 
-// Call the function when the page loads
+// Initialize everything when the page loads
 document.addEventListener('DOMContentLoaded', () => {
+  // Fetch Citibike data automatically
   fetchCitibikeData();
   
-  // Also run the progress bar animation
+  // Animate progress bars
   const progressBars = document.querySelectorAll('progress');
   
   progressBars.forEach(bar => {
@@ -122,6 +123,68 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, duration / steps);
   });
+  
+  // Initialize interactive cat eyes
+  const interactiveSection = document.getElementById('interactive-section');
+  
+  if (interactiveSection) {
+    // Create a tracking element that will follow the mouse
+    const tracker = document.createElement('div');
+    tracker.classList.add('cat-eye-tracker');
+    tracker.innerHTML = '<div class="pupil"></div>';
+    interactiveSection.appendChild(tracker);
+    
+    // Add another eye
+    const tracker2 = document.createElement('div');
+    tracker2.classList.add('cat-eye-tracker');
+    tracker2.innerHTML = '<div class="pupil"></div>';
+    interactiveSection.appendChild(tracker2);
+    
+    // Track mouse movement
+    interactiveSection.addEventListener('mousemove', (e) => {
+      // Get mouse position relative to the container
+      const rect = interactiveSection.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      // Calculate the position for the cat eyes (centered in the section)
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      // Position the first eye
+      tracker.style.left = (centerX - 40) + 'px';
+      tracker.style.top = centerY + 'px';
+      
+      // Position the second eye
+      tracker2.style.left = (centerX + 40) + 'px';
+      tracker2.style.top = centerY + 'px';
+      
+      // Calculate the angle for the pupils to look at the mouse
+      const pupils = document.querySelectorAll('.pupil');
+      pupils.forEach(pupil => {
+        const eyeRect = pupil.parentElement.getBoundingClientRect();
+        const eyeCenterX = eyeRect.left + eyeRect.width / 2 - rect.left;
+        const eyeCenterY = eyeRect.top + eyeRect.height / 2 - rect.top;
+        
+        // Calculate the angle
+        const angle = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
+        
+        // Limit the movement radius
+        const distance = Math.min(5, Math.hypot(mouseX - eyeCenterX, mouseY - eyeCenterY) / 10);
+        
+        // Move the pupil
+        const pupilX = Math.cos(angle) * distance;
+        const pupilY = Math.sin(angle) * distance;
+        
+        pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+      });
+    });
+    
+    // Add text explaining the feature
+    const instructions = document.createElement('p');
+    instructions.textContent = "Move your mouse around and watch Doudou's eyes follow you!";
+    interactiveSection.appendChild(instructions);
+  }
 });
 
 // Animate progress bars when page loads with a gradual effect
