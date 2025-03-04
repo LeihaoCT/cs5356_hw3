@@ -2,25 +2,126 @@
 const fetchButton = document.getElementById('fetch-button');
 const apiResults = document.getElementById('api-results');
 
-// Listen for a click on the "Fetch Data" button
-fetchButton.addEventListener('click', () => {
-  fetch('https://api.publicapis.org/entries')
-    .then(response => response.json())
+// Function to fetch Citibike data and update the UI
+function fetchCitibikeData() {
+  const apiResults = document.getElementById('api-results');
+  
+  // Update UI while loading
+  apiResults.innerHTML = '<li>Checking bike availability at Roosevelt Island Tramway...</li>';
+  
+  // First fetch station information to get the station ID for Roosevelt Island Tramway
+  fetch('https://gbfs.citibikenyc.com/gbfs/en/station_information.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
-      // Clear previous results, if any
-      apiResults.innerHTML = '';
-
-      // Grab the first 5 entries as a simple example
-      data.entries.slice(0, 5).forEach(entry => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${entry.API} - ${entry.Description}`;
-        apiResults.appendChild(listItem);
-      });
+      // Find Roosevelt Island Tramway station
+      const stations = data.data.stations;
+      const rooseveltStation = stations.find(station => 
+        station.name.includes("Roosevelt Island") && station.name.includes("Tramway")
+      );
+      
+      if (!rooseveltStation) {
+        throw new Error('Roosevelt Island Tramway station not found');
+      }
+      
+      // Get the station ID
+      const stationId = rooseveltStation.station_id;
+      
+      // Now fetch the station status data to get real-time availability
+      return fetch('https://gbfs.citibikenyc.com/gbfs/en/station_status.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(statusData => {
+          // Find the status for Roosevelt Island Tramway station
+          const stationStatus = statusData.data.stations.find(
+            station => station.station_id === stationId
+          );
+          
+          if (!stationStatus) {
+            throw new Error('Status for Roosevelt Island Tramway station not found');
+          }
+          
+          // Clear previous results
+          apiResults.innerHTML = '';
+          
+          // Create elements for station info
+          const stationName = document.createElement('li');
+          stationName.innerHTML = `<strong>${rooseveltStation.name}</strong>`;
+          apiResults.appendChild(stationName);
+          
+          const bikesAvailable = document.createElement('li');
+          bikesAvailable.textContent = `Bikes Available: ${stationStatus.num_bikes_available}`;
+          apiResults.appendChild(bikesAvailable);
+          
+          const docksAvailable = document.createElement('li');
+          docksAvailable.textContent = `Docks Available: ${stationStatus.num_docks_available}`;
+          apiResults.appendChild(docksAvailable);
+          
+          const lastUpdated = document.createElement('li');
+          const updateTime = new Date(stationStatus.last_reported * 1000).toLocaleTimeString();
+          lastUpdated.textContent = `Last Updated: ${updateTime}`;
+          apiResults.appendChild(lastUpdated);
+          
+          // Add Doudou's comment based on availability
+          const comment = document.createElement('li');
+          comment.style.fontStyle = 'italic';
+          comment.style.marginTop = '10px';
+          
+          if (stationStatus.num_bikes_available === 0) {
+            comment.textContent = "Doudou says: No bikes available? Just like my food bowl - always empty when I need it!";
+          } else if (stationStatus.num_bikes_available < 3) {
+            comment.textContent = "Doudou says: Only a few bikes left! Better hurry like I do when it's dinner time.";
+          } else {
+            comment.textContent = "Doudou says: Plenty of bikes available! Not that I care... I prefer my windowsill.";
+          }
+          
+          apiResults.appendChild(comment);
+        });
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
-      apiResults.innerHTML = '<li>Failed to load data. Please try again later.</li>';
+      console.error('Error fetching Citibike data:', error);
+      apiResults.innerHTML = '<li>Failed to load bike availability. Please try again later.</li>';
     });
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  fetchCitibikeData();
+  
+  // Also run the progress bar animation
+  const progressBars = document.querySelectorAll('progress');
+  
+  progressBars.forEach(bar => {
+    const finalValue = bar.value;
+    const duration = 1500; // Animation duration in milliseconds
+    const steps = 30; // Number of steps for the animation
+    const increment = finalValue / steps;
+    let currentValue = 0;
+    
+    // Reset to zero initially
+    bar.value = 0;
+    
+    // Create an interval to gradually increase the value
+    const interval = setInterval(() => {
+      currentValue += increment;
+      
+      // Make sure we don't exceed the final value
+      if (currentValue >= finalValue) {
+        bar.value = finalValue;
+        clearInterval(interval);
+      } else {
+        bar.value = currentValue;
+      }
+    }, duration / steps);
+  });
 });
 
 // Animate progress bars when page loads with a gradual effect
